@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formations Professionnelles</title>
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #f9c74f;
+            --dark-blue: #0d47a1;
+            --light-blue: #e3f2fd;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+            --spacing-unit: 20px;
+        }
+
+        /* Styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* En-tête */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        /* Bannière d'accueil */
+        .hero {
+            background: linear-gradient(to right, var(--dark-blue), var(--primary-color));
+            padding: 100px 0;
+            text-align: center;
+            color: var(--light-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Z"/></svg>');
+            background-size: cover;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--dark-blue);
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        /* Caractéristiques */
+        .features {
+            padding: 80px 0;
+            background-color: var(--light-blue);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 15px auto 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            background-color: var(--light-blue);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Guide interactif */
+        .interactive-guide {
+            padding: 80px 0;
+        }
+
+        .guide-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .guide-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .guide-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .guide-img img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .steps {
+            margin-top: 30px;
+        }
+
+        .step {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Galerie photo */
+        .gallery {
+            padding: 80px 0;
+            background-color: var(--light-blue);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Formulaire de contact */
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-form {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--light-text);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            color: var(--light-text);
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Médias queries pour responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête de la page -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">Forma<span>Pro</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#features">Formations</a></li>
+                <li><a href="#guide">Guide</a></li>
+                <li><a href="#gallery">Galerie</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Bannière d'accueil -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Développez vos compétences professionnelles</h1>
+            <p>Découvrez nos formations adaptées à vos besoins et accélérez votre carrière avec des cours pratiques et interactifs.</p>
+            <a href="#features" class="btn">Découvrir nos formations</a>
+        </div>
+    </section>
+
+    <!-- Section des caractéristiques -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Nos formations</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Marketing Digital</h3>
+                    <p>Maîtrisez les stratégies de marketing en ligne pour développer votre présence sur le web et augmenter vos conversions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Développement Web</h3>
+                    <p>Apprenez à créer des sites web modernes et réactifs avec les technologies les plus demandées sur le marché.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Design UX/UI</h3>
+                    <p>Créez des interfaces utilisateur attrayantes et intuitives qui répondent aux besoins des utilisateurs modernes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide interactif -->
+    <section class="interactive-guide" id="guide">
+        <div class="container">
+            <h2 class="section-title">Guide interactif</h2>
+            <div class="guide-container">
+                <div class="guide-content">
+                    <h3>Comment choisir votre formation ?</h3>
+                    <p>Nous vous guidons à travers le processus de sélection de la formation la plus adaptée à vos objectifs professionnels et à votre niveau actuel.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Évaluez vos besoins</h4>
+                                <p>Identifiez vos objectifs professionnels et les compétences que vous souhaitez développer.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Consultez nos programmes</h4>
+                                <p>Explorez notre catalogue de formations et comparez les différents modules proposés.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Contactez-nous</h4>
+                                <p>Discutez avec un conseiller pour finaliser votre choix et planifier votre parcours.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-img">
+                    <img src="/api/placeholder/500/300" alt="Guide de choix de formation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie photo -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Galerie</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Atelier pratique">
+                    <div class="gallery-caption">Atelier pratique de développement web</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Session de groupe">
+                    <div class="gallery-caption">Session de travail en groupe</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Conférence">
+                    <div class="gallery-caption">Conférence sur les tendances du marketing</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Espace de travail">
+                    <div class="gallery-caption">Notre espace de formation moderne</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Certificat">
+                    <div class="gallery-caption">Remise de certificats</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Workshop">
+                    <div class="gallery-caption">Workshop design thinking</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire de contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-nous</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informations de contact</h3>
+                    <p>Vous avez des questions sur nos formations ? N'hésitez pas à nous contacter pour plus d'informations.</p>
+                    <p><strong>Email:</strong> contact@formapro.fr</p>
+                    <p><strong>Téléphone:</strong> +33 1 23 45 67 89</p>
+                    <p><strong>Adresse:</strong> 123 Avenue de la Formation, 75000 Paris</p>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="info">Demande d'information</option>
+                                <option value="inscription">Inscription à une formation</option>
+                                <option value="tarif">Demande de tarif</option>
+                                <option value="autre">Autre demande</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-submit">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FormaPro</h3>
+                    <p>Nous proposons des formations professionnelles de qualité pour vous aider à développer vos compétences et accélérer votre carrière.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#features">Formations</a></li>
+                        <li><a href="#guide">Guide</a></li>
+                        <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Suivez-nous</h3>
+                    <p>Restez connecté pour les dernières actualités et offres spéciales.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FormaPro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script pour la navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Script pour le formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Ici, vous pouvez ajouter le code pour envoyer les données du formulaire
+            alert('Votre message a été envoyé avec succès !');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
